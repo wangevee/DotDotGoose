@@ -566,7 +566,6 @@ class Canvas(QtWidgets.QGraphicsScene):
         self.points = {}
         self.colors = {}
         self.classes = []
-        self.classes = []
         self.selection = []
         self.redo_queue = []
         self.undo_queue = []

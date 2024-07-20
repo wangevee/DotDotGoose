@@ -109,6 +109,7 @@ class PointWidget(QtWidgets.QWidget, WIDGET):
             self.canvas.add_class(class_name)
             self.display_classes()
             self.display_count_tree()
+            self.canvas.update_point_count.emit(self.canvas.current_image_name, class_name, 0)
 
     def display_grid(self, display):
         self.canvas.toggle_grid(display=display)
@@ -285,6 +286,7 @@ class PointWidget(QtWidgets.QWidget, WIDGET):
                 self.canvas.remove_class(class_name)
                 self.display_classes()
                 self.display_count_tree()
+                self.canvas.update_point_count.emit(self.canvas.current_image_name, class_name, 0)
 
     def select_model_item(self, model_index):
         item = self.model.itemFromIndex(model_index)
@@ -341,7 +343,8 @@ class PointWidget(QtWidgets.QWidget, WIDGET):
         if len(items) == 0:
             self.display_count_tree()
         else:
-            items[0].child(self.canvas.classes.index(class_name), 1).setText(str(class_count))
+            if class_name in self.canvas.classes:
+                items[0].child(self.canvas.classes.index(class_name), 1).setText(str(class_count))
 
     def update_ui_settings(self):
         ui = self.canvas.ui
